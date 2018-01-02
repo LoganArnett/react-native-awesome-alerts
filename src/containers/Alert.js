@@ -95,6 +95,8 @@ export default class Alert extends Component {
     const {title, message} = this.props;
     const {showCancelButton, cancelText, cancelButtonColor, onCancelPressed} = this.props;
     const {showConfirmButton, confirmText, confirmButtonColor, onConfirmPressed} = this.props;
+    const {containerStyle, titleSize, messageSize} = this.props;
+    const {confirmButtonContainerStyle, confirmButtonTextStyle, cancelButtonContainerStyle, cancelButtonTextStyle} = this.props;
 
     return (
       <View style={styles.container}>
@@ -106,8 +108,8 @@ export default class Alert extends Component {
         <Animated.View style={[styles.alertContainer, animation]}>
           <View style={styles.content}>
             <Progress showProgress={showProgress} />
-            <Title title={title} />
-            <Message message={message} />
+            <Title title={title} style={titleSize ? { fontSize: titleSize } : {}} />
+            <Message message={message} style={messageSize ? { fontSize: messageSize } : {}} />
           </View>
           <View style={styles.action}>
             <Button
@@ -115,12 +117,16 @@ export default class Alert extends Component {
               show={showCancelButton}
               backgroundColor={cancelButtonColor}
               onPress={onCancelPressed}
+              textStyle={cancelButtonTextStyle}
+              containerStyle={cancelButtonContainerStyle}
             />
             <Button
               text={confirmText}
               show={showConfirmButton}
               backgroundColor={confirmButtonColor}
               onPress={onConfirmPressed}
+              textStyle={confirmButtonTextStyle}
+              containerStyle={confirmButtonContainerStyle}
             />
           </View>
         </Animated.View>
@@ -163,6 +169,13 @@ Alert.propTypes = {
   confirmButtonColor: PropTypes.string,
   onCancelPressed: PropTypes.func,
   onConfirmPressed: PropTypes.func,
+  containerStyle: PropTypes.object,
+  titleSize: PropTypes.number,
+  messageSize: PropTypes.number,
+  confirmButtonContainerStyle: PropTypes.object,
+  confirmButtonTextStyle: PropTypes.object,
+  cancelButtonContainerStyle: PropTypes.object,
+  cancelButtonTextStyle: PropTypes.object
 };
 
 Alert.defaultProps = {

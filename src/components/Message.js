@@ -7,25 +7,26 @@ import styles from './styles/MessageStyles';
 
 export default class Message extends Component {
 
-  _renderMessage = (message) => {
+  _renderMessage = (message, style) => {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{message}</Text>
+        <Text style={[styles.text, style]}>{message}</Text>
       </View>
     );
   }
 
   render() {
-    const {message} = this.props;
+    const {message, style} = this.props;
     const show = typeof message === 'string';
 
     if(show)
-      return this._renderMessage(message);
+      return this._renderMessage(message, style);
     else
       return null;
   };
 };
 
 Message.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
+  style: PropTypes.object
 };

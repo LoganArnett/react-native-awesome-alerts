@@ -7,7 +7,7 @@ import styles from './styles/ButtonStyles';
 
 export default class Button extends Component {
 
-  _renderButton = () => {
+  _renderButton = (textStyle, containerViewStyle) => {
     const {text, backgroundColor} = this.props;
     const {onPress} = this.props;
 
@@ -17,18 +17,18 @@ export default class Button extends Component {
       <TouchableOpacity
         onPress={onPress}
           >
-        <View style={[styles.container, containerStyle]}>
-          <Text style={styles.text}>{text}</Text>
+        <View style={[styles.container, containerStyle, containerViewStyle]}>
+          <Text style={[styles.text, textStyle]}>{text}</Text>
         </View>
     </TouchableOpacity>
     );
   };
 
   render() {
-    const {show} = this.props;
+    const {show, textStyle, containerStyle} = this.props;
 
     if(show)
-      return this._renderButton();
+      return this._renderButton(textStyle, containerStyle);
     else
       return null
   };
@@ -37,7 +37,9 @@ export default class Button extends Component {
 Button.propTypes = {
   show: PropTypes.bool,
   text: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  textStyle: PropTypes.object,
+  containerStyle: PropTypes.object,
 };
 
 Button.defaultProps = {
